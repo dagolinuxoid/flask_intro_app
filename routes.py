@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 app = Flask(__name__)
 
 # psst not only session but flash also reqieres setting up of a secret key
@@ -25,8 +25,15 @@ def log():
         if request.form['name'] != 'admin' or request.form['password'] != 'admin':
             flash('Invalid credentials')
         else:
+            session['logged_in'] = True
             return redirect(url_for('hello'))       
     return render_template('log.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    flash('You are logged out')
+    return redirect(url_for('log'))
 
 if __name__ == '__main__':
     # don't use it in production
