@@ -23,10 +23,9 @@ def log():
     if request.method == 'POST':
         if request.form['name'] != 'admin' or request.form['password'] != 'admin':
             error='Invalid credentials'
-            return render_template('log.html', error=error)
         else:
             return redirect(url_for('hello'))       
-    return render_template('log.html')
+    return render_template('log.html', error=error)
 
 if __name__ == '__main__':
     # don't use it in production
