@@ -1,0 +1,18 @@
+{% extends 'templates.html' %}
+{% block content %}
+  <p>Log in</p>
+  <form action="" method='POST'>
+    <p><label for="username">Name</label><input type="text" name="name" id="username"></p>
+    <p>
+      <lbalel>Password</lbalel>
+      <input type="password" name="password" id="">
+    </p>
+  </form>
+
+  <p>{{ error }}</p>
+
+  {% if error %}
+    <p>You did it wrong! {{ error }}</p>
+  {% endif %}
+  
+{% endblock %}
