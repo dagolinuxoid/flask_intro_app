@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 
 # there is no route to template.html
@@ -11,6 +11,22 @@ def home():
 @app.route('/welcome')
 def welcome():
     return render_template('welcome.html')
+
+# private page | for an individual user
+@app.route('/hello')
+def hello():
+    return render_template('hello.html')
+
+@app.route('/log', methods=['GET', 'POST'])
+def log():
+    error=None
+    if request.method == 'POST':
+        if request.form['name'] != 'admin' or request.form['password'] != 'admin':
+            error='Invalid credentials'
+            return render_template('log.html', error=error)
+        else:
+            return redirect(url_for('hello'))       
+    return render_template('log.html')
 
 if __name__ == '__main__':
     # don't use it in production
