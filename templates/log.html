@@ -10,8 +10,9 @@
     <button type="submit">login</button>
   </form>
 
-  {% for error in get_flashed_messages() %}
-    <p style="margin-top: 1em">You did it wrong! {{ error }}</p>
+  {% for error_or_logout_status in get_flashed_messages() %}
+  <!-- polymorphism -->
+    <p style="margin-top: 1em">{{ error_or_logout_status }}</p>
   {% endfor %}
 
 {% endblock %}
