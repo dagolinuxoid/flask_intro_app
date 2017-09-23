@@ -1,6 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 app = Flask(__name__)
 
+# psst not only session but flash also reqieres setting up of a secret key
+app.secret_key = 'my private secret key'
 # there is no route to template.html
 # template.html is using as a base
 
