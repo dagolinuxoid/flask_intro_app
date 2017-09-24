@@ -24,7 +24,7 @@ def login_required(isLogged):
             return isLogged(*args, **kwargs)
         else:
             flash('You need to login first')
-            return redirect(ufl_for('log'))
+            return redirect(url_for('log'))
     return wrap
    
 # private page | for an individual user
