@@ -16,6 +16,17 @@ def home():
 def welcome():
     return render_template('welcome.html')
 
+# how does it exactly work?
+def login_required(isLogged):
+    @wraps(isLogged)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return isLogged(*args, **kwargs)
+        else:
+            flash('You need to login first')
+            return redirect(ufl_for('log'))
+    return wrap
+   
 # private page | for an individual user
 @app.route('/hello')
 @login_required
@@ -39,18 +50,7 @@ def logout():
     session.clear()
     flash('You are logged out')
     return redirect(url_for('log'))
-
-# how does it exactly work?
-def login_required(isLogged):
-    @wraps(isLogged)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return isLogged(*args, **kwargs)
-        else:
-            flash('You need to login first')
-            return redirect(ufl_for('log'))
-    return wrap
-    
+ 
 if __name__ == '__main__':
     # don't use it in production
     app.run(debug=True)
