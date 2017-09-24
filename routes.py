@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
+import os
+from functools import wraps
 app = Flask(__name__)
 
 # psst not only session but flash also reqieres setting up of a secret key
-app.secret_key = 'my private secret key'
+app.secret_key = os.urandom(24)
 # there is no route to template.html
 # template.html is using as a base
 
