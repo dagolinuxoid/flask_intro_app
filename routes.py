@@ -51,6 +51,10 @@ def logout():
     flash('You are logged out')
     return redirect(url_for('log'))
  
+@app.errorhandler(404)
+def page404(error):
+    return render_template('page404.html'), 404
+
 if __name__ == '__main__':
     # don't use it in production
     app.run(debug=True)
