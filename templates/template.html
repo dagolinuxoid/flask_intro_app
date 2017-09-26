@@ -11,14 +11,15 @@
   <header>
     <div class="navbar navbar-inverse">
       <div class="navbar-inner">
-        <a href="{{ url_for('home') }}" class="brand">Real Python (for the web!)</a>
         <ul class="nav">
           <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
           <li><a href="{{ url_for('welcome') }}">Welcome</a></li>
           {% if not session.logged_in %}
           <li><a href="{{ url_for('log') }}">Login</a></li>
           {% else %}
-          <li><a href="{{ url_for('logout') }}">Logout</a></li>
+	  <li><a href="{{ url_for('compose') }}">Compose</a></li>
+	  <li><a href="{{ url_for('diary') }}">Diary</a></li>
+	  <li><a href="{{ url_for('logout') }}">Logout</a></li>
           {% endif %}
         </ul>
       </div>
