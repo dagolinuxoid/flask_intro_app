@@ -1,12 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-import os
 from functools import wraps
-app = Flask(__name__)
+from cs50 import SQL
 
+app = Flask(__name__)
+app.config.from_object('dev_conf')
+
+db=SQL('sqlite:///{}'.format(app.config['DATABASE']))
 # psst not only session but flash also reqieres setting up of a secret key
-app.secret_key = os.urandom(24)
 # there is no route to template.html
 # template.html is using as a base
+
 
 @app.route('/')
 def home():
@@ -27,6 +30,22 @@ def login_required(isLogged):
             return redirect(url_for('log'))
     return wrap
    
+@app.route('/compose',methods=['GET', 'POST'])
+@login_required
+def compose():
+    if request.method == 'POST':
+        if request.form.get('title') != '' and request.form.get('post') != '':
+            db.execute('insert into posts values (:title, :post)',
+                    title=request.form.get('title'), post=request.form.get('post'))
+            return redirect(url_for('diary'))
+    return render_template('compose.html')
+
+@app.route('/diary')
+@login_required
+def diary():
+    posts=db.execute('select title, post from posts')
+    return render_template('diary.html',posts=posts)
+
 # private page | for an individual user
 @app.route('/hello')
 @login_required
@@ -57,4 +76,4 @@ def page404(error):
 
 if __name__ == '__main__':
     # don't use it in production
-    app.run(debug=True)
+    app.run()
