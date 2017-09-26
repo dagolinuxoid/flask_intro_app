@@ -1,0 +1,8 @@
+{% extends "template.html" %}
+{% block content %}
+  <h2>See all your sentences</h2>
+  {% for post in posts %}
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.post }}</p>
+  {% endfor %}
+{% endblock %}
