@@ -1,2 +1,2 @@
-bootstrap.css
-bootstrap.min.css
+# ignore a virtual environment folder (ve)
+ve
