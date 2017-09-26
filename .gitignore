@@ -1,2 +1,6 @@
 # ignore a virtual environment folder (ve)
 ve
+# ignore __pycacache__ folder
+__pycache__
+# ignore database file
+data.db
