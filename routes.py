@@ -55,7 +55,7 @@ def hello():
 @app.route('/log', methods=['GET', 'POST'])
 def log():
     if request.method == 'POST':
-        if request.form['name'] != 'admin' or request.form['password'] != 'admin':
+        if request.form['name'] != app.config['USER'] or request.form['password'] != app.config['PASSWORD']:
             flash('Invalid credentials')
         else:
             session['logged_in'] = True
@@ -75,5 +75,4 @@ def page404(error):
     return render_template('page404.html'), 404
 
 if __name__ == '__main__':
-    # don't use it in production
     app.run()
