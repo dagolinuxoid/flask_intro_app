@@ -44,3 +44,57 @@
 .nav__item--active .nav__link:hover {
   color: black;
 }
+
+
+/* form */
+
+.form {
+  text-align: center;
+}
+
+.form__header {
+  font-size: 20px;
+}
+
+.form__body {
+  width: 300px;
+  margin: 0 auto;
+  padding: 0 15px 15px;
+  border: 1px solid #d8dee2;
+  text-align: left;
+}
+
+.form__label {
+  display: block;
+}
+
+.form__input, 
+.form__submit {
+  width: 100%;
+}
+
+.form__input {
+  margin-top: 5px;
+}
+
+.form__submit {
+  font-size: 14px;
+  font-weight: bold;
+  background-color: cornflowerblue;
+  color: black;
+  border: 1px solid rgba(27,31,35,0.5);
+  display: block;
+  margin-top: 20px;
+  border-radius: 2px;
+  padding: 3px 0;
+}
+
+.form__submit:hover {
+  cursor: pointer;
+  filter: opacity(.93);
+}
+
+.attention-msg {
+  text-align: center;
+  color: coral;
+}
