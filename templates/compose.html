@@ -1,9 +1,15 @@
 {% extends "template.html" %}
 {% block content %}
-    <h2>Create a sentence</h2>
-    <form action="" method='post'>
-      <p>TITLE | <input type="text" name="title"></p>
-      <textarea name="post"></textarea>
-      <input type="submit" value="commit">
+    <form class="form" action="{{ url_for('compose') }}" method='post'>
+      <h2 class="form__header">Write your thoughts</h2>
+      <div class="form__body">
+          <p>
+            <label class="form__label" for="post-title">Title</label>
+            <input class="form__input"  type="text" name="title" id="post-title">
+          </p>
+          <label for="thought">A casual or interesting thought</label>
+          <textarea class="form__area"  id="thought" name="post"></textarea>
+          <input  class="form__submit" type="submit" value="Write it down">
+        </div>
     </form>
 {% endblock %}
