@@ -1,18 +1,23 @@
 {% extends 'template.html' %}
 {% block content %}
-  <p>Log in</p>
-  <form action="" method='POST'>
-    <p><label for="username">Name</label><input type="text" name="name" id="username"></p>
-    <p>
-      <label>Password</label>
-      <input type="password" name="password" id="">
-    </p>
-    <button type="submit">login</button>
+  <form class="form" action="{{ url_for('log') }}" method='post'>
+    <h2 class="form__header">Log in == Sign in</h2>
+    <div class="form__body">
+      <p>
+        <label class="form__label" for="username">Name</label>
+        <input class="form__input"  type="text" name="name" id="username">
+      </p>
+      <p>
+        <label class="form__label" for="password">Password</label>
+        <input class="form__input" type="password" name="password" id="password">
+      </p>
+      <input  class="form__submit" type="submit" value="Commit">
+    </div>
   </form>
 
   {% for error_or_logout_status in get_flashed_messages() %}
   <!-- polymorphism -->
-    <p style="margin-top: 1em">{{ error_or_logout_status }}</p>
+  <p class="attention-msg">{{ error_or_logout_status }}</p>
   {% endfor %}
 
 {% endblock %}
