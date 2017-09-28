@@ -50,6 +50,7 @@
 
 .form {
   text-align: center;
+  margin-top: 20px;
 }
 
 .form__header {
@@ -97,4 +98,11 @@
 .attention-msg {
   text-align: center;
   color: coral;
+}
+
+.form__area {
+  width: 100%;
+  height: 150px;
+  resize: none;
+  margin-top: 5px;
 }
