@@ -54,6 +54,8 @@ def hello():
 
 @app.route('/log', methods=['GET', 'POST'])
 def log():
+    if session.get('logged_in'):
+        return redirect(url_for('home'))
     if request.method == 'POST':
         if request.form['name'] != app.config['USER'] or request.form['password'] != app.config['PASSWORD']:
             flash('Invalid credentials')
