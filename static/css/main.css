@@ -35,3 +35,12 @@
   color: inherit;
   text-decoration: none;
 }
+
+.nav__link:hover {
+  color: cornflowerblue;
+}
+
+/* omg ... */
+.nav__item--active .nav__link:hover {
+  color: black;
+}
