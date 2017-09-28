@@ -57,7 +57,7 @@ def log():
     if session.get('logged_in'):
         return redirect(url_for('home'))
     if request.method == 'POST':
-        if request.form['name'] != app.config['USER'] or request.form['password'] != app.config['PASSWORD']:
+        if request.form.get('name') != app.config['USER'] or request.form.get('password') != app.config['PASSWORD']:
             flash('Invalid credentials')
         else:
             session['logged_in'] = True
