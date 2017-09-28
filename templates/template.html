@@ -8,22 +8,22 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-  <header>
-    <div class="navbar navbar-inverse">
-      <div class="navbar-inner">
+  <header class="main-header" role="banner">
         <ul class="nav">
-          <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
-          <li><a href="{{ url_for('welcome') }}">Welcome</a></li>
+          <li class="nav__item nav__item--active">
+            <a href="{{ url_for('home') }}" class="nav__link">Home</a>
+          </li>
+          <!-- Is it redundant (nesting an anchor on a separate line above)? -->
+          <li class="nav__item"><a href="{{ url_for('welcome') }}" class="nav__link">Welcome</a></li>
           {% if not session.logged_in %}
-          <li><a href="{{ url_for('log') }}">Login</a></li>
+          <li class="nav__item"><a href="{{ url_for('log') }}" class="nav__link">Login</a></li>
           {% else %}
-	  <li><a href="{{ url_for('compose') }}">Compose</a></li>
-	  <li><a href="{{ url_for('diary') }}">Diary</a></li>
-	  <li><a href="{{ url_for('logout') }}">Logout</a></li>
+          <!-- class attribute or href should go first? -->
+          <li class="nav__item"><a class="nav__link" href="{{ url_for('compose') }}">Compose</a></li>
+          <li class="nav__item"><a class="nav__link" href="{{ url_for('diary') }}">Diary</a></li>
+          <li class="nav__item"><a class="nav__link" href="{{ url_for('logout') }}">Logout</a></li>
           {% endif %}
         </ul>
-      </div>
-    </div>
   </header>
   <div class="container">
     {% block content %}
