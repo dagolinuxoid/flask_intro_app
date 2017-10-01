@@ -10,17 +10,47 @@
 <body>
   <header class="main-header" role="banner">
         <ul class="nav">
-          <li class="nav__item nav__item--active">
+					<li{% if request.path == url_for('home') %}
+						class="nav__item nav__item--active"
+						{% else %}
+						class="nav__item"
+						{% endif %}>
             <a href="{{ url_for('home') }}" class="nav__link">Home</a>
           </li>
-          <!-- Is it redundant (nesting an anchor on a separate line above)? -->
-          <li class="nav__item"><a href="{{ url_for('welcome') }}" class="nav__link">Welcome</a></li>
+
+					<li{% if request.path == url_for('welcome') %}
+						class="nav__item nav__item--active"
+						{% else %}
+						class="nav__item"
+						{% endif %}>
+            <a href="{{ url_for('welcome') }}" class="nav__link">Welcome</a>
+          </li>
+
           {% if not session.logged_in %}
-          <li class="nav__item"><a href="{{ url_for('log') }}" class="nav__link">Login</a></li>
+					<li{% if request.path == url_for('log') %}
+						class="nav__item nav__item--active"
+						{% else %}
+						class="nav__item"
+						{% endif %}>
+            <a href="{{ url_for('log') }}" class="nav__link">Login</a>
+					</li>
           {% else %}
-          <!-- class attribute or href should go first? -->
-          <li class="nav__item"><a class="nav__link" href="{{ url_for('compose') }}">Compose</a></li>
-          <li class="nav__item"><a class="nav__link" href="{{ url_for('diary') }}">Diary</a></li>
+					<li{% if request.path == url_for('compose') %}
+						class="nav__item nav__item--active"
+						{% else %}
+						class="nav__item"
+						{% endif %}>
+            <a href="{{ url_for('compose') }}" class="nav__link">Compose</a>
+					</li>
+						
+					<li{% if request.path == url_for('diary') %}
+						class="nav__item nav__item--active"
+						{% else %}
+						class="nav__item"
+						{% endif %}>
+            <a href="{{ url_for('diary') }}" class="nav__link">Diary</a>
+					</li>
+
           <li class="nav__item"><a class="nav__link" href="{{ url_for('logout') }}">Logout</a></li>
           {% endif %}
         </ul>
@@ -29,5 +59,6 @@
     {% block content %}
     {% endblock %}
   </div>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
