@@ -1,10 +1,8 @@
 {% extends "template.html" %}
+{% block title %}custom 404 page{% endblock %}
 {% block content %}
 <!-- it is so 'elegant' -->
   <style> 
-  body {
-    background: crimson;
-  }  
   .nav__item--active {
     background-color: #24292c;
     font-weight: normal;
@@ -12,6 +10,7 @@
   }
   </style>
   <!-- frowned upon -->
-  <h1 style="color: black">I am so sorry. But this page does not exist</h1>
-  <p>Psst. You definitely messed up with URL</p>
+  <h1 class="main-title">I am so sorry... But this page does not exist</h1>
+  <p>404</p>
+  <p>Psst. You definitely messed up with URL | At least I hope so and your internet is running</p>
 {% endblock %}
