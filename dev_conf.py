@@ -1,5 +1,5 @@
 SECRET_KEY='supper-pupper-dupper random secret key'
-DEBUG=True
+DEBUG=False
 DATABASE='data.db'
 USER='Artur'
 PASSWORD='dago'
