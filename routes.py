@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from functools import wraps
 from cs50 import SQL
-import psycopg2
 
 app = Flask(__name__)
 app.config.from_object('dev_conf')
