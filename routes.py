@@ -7,8 +7,6 @@ app.config.from_object('dev_conf')
 
 db=SQL('sqlite:///{}'.format(app.config['DATABASE']))
 # psst not only session but flash also reqieres setting up of a secret key
-# there is no route to template.html
-# template.html is using as a base
 
 
 @app.route('/')
