@@ -5,10 +5,12 @@ from cs50 import SQL
 app = Flask(__name__)
 app.config.from_object('dev_conf')
 
-db=SQL('sqlite:///{}'.format(app.config['DATABASE']))
+#db=SQL('sqlite:///{}'.format(app.config['DATABASE']))
+#db=SQL('postgresql://localhost/{}'.format(app.config['DATABASE']))
+#db=SQL('postgresql://localhost/postgredata')
+db=SQL('postgresql://linux:dago@localhost/postgredata')
+#db=SQL('sqlite:///data.db')
 # psst not only session but flash also reqieres setting up of a secret key
-# there is no route to template.html
-# template.html is using as a base
 
 
 @app.route('/')
@@ -23,7 +25,8 @@ def welcome():
 def login_required(isLogged):
     @wraps(isLogged)
     def wrap(*args, **kwargs):
-        if 'logged_in' in session:
+        #if 'logged_in' in session:
+        if session.get('logged_in'):
             return isLogged(*args, **kwargs)
         else:
             flash('You need to login first')
@@ -67,8 +70,8 @@ def log():
 @app.route('/logout')
 @login_required
 def logout():
-    # session.pop('logged_in', None)
-    session.clear()
+    session.pop('logged_in', None)
+    #session.clear()
     flash('You are logged out')
     return redirect(url_for('log'))
  
