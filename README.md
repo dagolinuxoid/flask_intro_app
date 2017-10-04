@@ -1,12 +1,11 @@
 Requirements and how to deploy/build locally
-
+```
 python3
 virtual environment
 sqlite3 (for master branch)
 postgresql (for postgre-branch branch)
 
-
-git clone git@github.com:dagolinuxoid/flask_intro_app.git
+clone this repo (flask_intro_app)
 cd flask_intro_app
 
 There we go | sqlite version (git checkout master)
@@ -24,3 +23,4 @@ pip install -r requirements.txt
 createdb --owner=someUser nameOfYourPosgtreSQLdb
 psql nameOfYourPostgreSQLdb < schema.sql
 change db=SQL('...') in routes.py accordingly
+```
