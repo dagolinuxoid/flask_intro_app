@@ -1,17 +1,52 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from functools import wraps
-from cs50 import SQL
+#from cs50 import SQL
+import os
+import sqlalchemy
 
 app = Flask(__name__)
 app.config.from_object('dev_conf')
 
-#db=SQL('sqlite:///{}'.format(app.config['DATABASE']))
+'''
+BIG update for cs50 library — 
+in order to prevent this pesky sqlalchemy.exc.OperationalError 
+debugger: lastval is not yet defined in this session
+thanks to Anya Zhang for pointing to it in her Medium article 
+'''
+class SQL(object):
+    def __init__(self, url):
+        try:
+            self.engine = sqlalchemy.create_engine(url)
+        except Exception as e:
+            raise RuntimeError(e)
+
+    def execute(self, text, *multiparams, **params):
+        try:
+            statement = sqlalchemy.text(text).bindparams(*multiparams, **params)
+            result = self.engine.execute(str(statement.compile(compile_kwargs={"literal_binds": True})))
+
+            # SELECT
+            if result.returns_rows:
+                rows = result.fetchall()
+                return [dict(row) for row in rows]
+
+            # INSERT
+            elif result.lastrowid is not None:
+                return result.lastrowid
+
+            # DELETE, UPDATE
+            else:
+                return result.rowcount
+
+        except sqlalchemy.exc.IntegrityError:
+            return None
+
+        except Exception as e:
+            raise RuntimeError(e)
+
 #db=SQL('postgresql://localhost/{}'.format(app.config['DATABASE']))
 #db=SQL('postgresql://localhost/postgredata')
 db=SQL('postgresql://linux:dago@localhost/postgredata')
-#db=SQL('sqlite:///data.db')
-# psst not only session but flash also reqieres setting up of a secret key
-
 
 @app.route('/')
 def home():
