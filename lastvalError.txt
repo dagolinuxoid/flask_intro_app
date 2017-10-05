@@ -1,1 +1,0 @@
-sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) lastval is not yet defined in this session [SQL: 'SELECT LASTVAL()']
